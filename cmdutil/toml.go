@@ -12,6 +12,7 @@ func readTOMLConfig(filename string, scriptPath string, runCommandPrefix string)
 	tomlFile, err := toml.LoadFile(filename)
 	if err != nil {
 		if os.IsNotExist(err) {
+			// In this context, a missing file is not an error
 			return nil, nil
 		}
 		return nil, fmt.Errorf("error reading file: %v", err)

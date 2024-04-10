@@ -61,7 +61,7 @@ func constructProjectCommandMap() projectCommandMap {
 	projectCommandMap := make(projectCommandMap)
 	for _, projectCmd := range ProjectCommands {
 		commands, err := projectCmd.ConfigFunc(projectCmd.Filepath)
-		if err == nil {
+		if err == nil && commands != nil {
 			for _, cmdConfig := range commands.Commands {
 				localCmdConfig := cmdConfig
 				cmd, ok := projectCommandMap[localCmdConfig.Name]

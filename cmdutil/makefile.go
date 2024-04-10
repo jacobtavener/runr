@@ -19,6 +19,7 @@ func parseMakeFile(filename string, parsedFiles map[string]bool) (map[string]Met
 	file, err := os.Open(filename)
 	if err != nil {
 		if os.IsNotExist(err) {
+			// In this context, a missing file is not an error
 			return nil, nil
 		}
 		return nil, fmt.Errorf("error reading file: %v", err)

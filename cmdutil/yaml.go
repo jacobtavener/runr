@@ -51,6 +51,7 @@ func ReadYamlConfig(filename string) (*Config, error) {
 	yamlFile, err := os.ReadFile(filename)
 	if err != nil {
 		if os.IsNotExist(err) {
+			// In this context, a missing file is not an error
 			return nil, nil
 		}
 		return nil, fmt.Errorf("error reading file: %v", err)
