@@ -33,18 +33,12 @@ jobs:
     - name: Lint
       run: go fmt ./... && go vet ./...
 
-    - name: Get Git tag
-      run: |
-        TAG=$(git describe --tags)
-        echo "Git tag is $TAG"
-        echo "::set-output name=tag::$TAG"
-
     - name: Build for ${{ matrix.os }}/${{ matrix.arch }}
       run: |
-        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o runr_${{ matrix.os }}_${{ matrix.arch }}_${{ steps.git-tag.outputs.tag }} .
+        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o runr_${{ matrix.os }}_${{ matrix.arch }}_${{ github.ref_name }} .
 
     - name: Publish
       uses: actions/upload-artifact@v4
       with:
-        name: runr_${{ steps.git-tag.outputs.tag }}
+        name: runr_${{ github.ref_name }}
         path: runr_*
