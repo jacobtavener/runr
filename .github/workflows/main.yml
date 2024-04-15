@@ -2,6 +2,8 @@ name: Go Build and Publish
 
 on:
   push:
+    branches:
+      - '*'
     tags:
       - '*'
 
@@ -35,10 +37,10 @@ jobs:
 
     - name: Build for ${{ matrix.os }}/${{ matrix.arch }}
       run: |
-        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o runr_${{ matrix.os }}_${{ matrix.arch }}_${{ github.ref_name }} .
+        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o runr_${{ matrix.os }}_${{ matrix.arch }}_$(git describe --tags) .
 
     - name: Publish
       uses: actions/upload-artifact@v4
       with:
-        name: runr_${{ github.ref_name }}
+        name: runr_${{ matrix.os }}_${{ matrix.arch }}_$(git describe --tags)
         path: runr_*
