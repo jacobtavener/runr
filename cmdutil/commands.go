@@ -42,14 +42,14 @@ type CommandConfig struct {
 	Env      []VarType
 }
 type Command struct {
-	Name string
-	Args []string
-	Env  []VarType
+	Shell string
+	Args  []string
+	Env   []VarType
 }
 
 /* FUNCTIONS */
-func runCommand(name string, env []VarType, args ...string) (int, error) {
-	cmd := exec.Command(name, args...)
+func runCommand(shell string, env []VarType, args ...string) (int, error) {
+	cmd := exec.Command(shell, args...)
 
 	additionalEnv := os.Environ()
 	for _, e := range env {
@@ -85,7 +85,7 @@ func runCommand(name string, env []VarType, args ...string) (int, error) {
 
 func RunCommands(commands []Command) {
 	for _, cmd := range commands {
-		exitCode, err := runCommand(cmd.Name, cmd.Env, cmd.Args...)
+		exitCode, err := runCommand(cmd.Shell, cmd.Env, cmd.Args...)
 		if err != nil {
 			fmt.Println("Error running command:", err)
 		}
