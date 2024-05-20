@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/jacobtavener/runr/cmdutil"
@@ -35,24 +36,21 @@ var ProjectCommands = [3]projectCommand{
 	{Filepath: "Makefile", Alias: "make", ConfigFunc: cmdutil.ReadMakeFileConfig},
 }
 
+func getShellCommand() (string, string) {
+	if runtime.GOOS == "windows" {
+		return "cmd", "/c"
+	}
+	return "sh", "-c"
+}
+
 /* FUNCTIONS */
 func constructCommands(scripts []string, extraArgs []string, env []cmdutil.VarType) []cmdutil.Command {
 	cmds := make([]cmdutil.Command, len(scripts))
 	for i, command := range scripts {
-		split := strings.Split(command, " ")
-
-		if len(split) == 0 {
-			fmt.Println("Invalid script format:", command)
-			continue
-		}
-
-		name := split[0]
-		args := split[1:]
-		cmdArgs := make([]string, len(args)+len(extraArgs))
-		copy(cmdArgs, args)
-		copy(cmdArgs[len(args):], extraArgs)
-
-		cmds[i] = cmdutil.Command{Name: name, Args: cmdArgs, Env: env}
+		shell, cflag := getShellCommand()
+		cmdArgs := append([]string{cflag}, command)
+		cmdArgs = append(cmdArgs, extraArgs...)
+		cmds[i] = cmdutil.Command{Shell: shell, Args: cmdArgs, Env: env}
 	}
 	return cmds
 }
