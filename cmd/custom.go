@@ -48,8 +48,9 @@ func constructCommands(scripts []string, extraArgs []string, env []cmdutil.VarTy
 	cmds := make([]cmdutil.Command, len(scripts))
 	for i, command := range scripts {
 		shell, cflag := getShellCommand()
-		cmdArgs := append([]string{cflag}, command)
-		cmdArgs = append(cmdArgs, extraArgs...)
+		// TODO: This is a bit of a hack, but it works for now...
+		fullCommand := fmt.Sprintf("%s %s", command, strings.Join(extraArgs, " "))
+		cmdArgs := []string{cflag, fullCommand}
 		cmds[i] = cmdutil.Command{Shell: shell, Args: cmdArgs, Env: env}
 	}
 	return cmds
