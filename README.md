@@ -74,4 +74,5 @@ commands:
       - echo "Hello, $MY_ENV_VAR!"
       - echo "This is a custom command." 
 ```
- Note: If multiple scripts are defined, they will be run in order, in different shell sessions. 
+[!NOTE]
+If multiple scripts are defined, they will be run in order, in different shell sessions.
