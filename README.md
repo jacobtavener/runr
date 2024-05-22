@@ -24,8 +24,8 @@ You can also clone the repository and install the binary yourself.
 > [!NOTE]
 > The builds are not signed, so you may need to allow the binary to run in your system settings.
 
-[!WARNING]
-This project is still in development and may not be stable. Use at your own risk.
+> [!WARNING]
+> This project is still in development and may not be stable. Use at your own risk.
 It has only been tested on MacOS.
 
 
@@ -74,5 +74,5 @@ commands:
       - echo "Hello, $MY_ENV_VAR!"
       - echo "This is a custom command." 
 ```
-[!NOTE]
-If multiple scripts are defined, they will be run in order, in different shell sessions.
+> [!NOTE]
+> If multiple scripts are defined, they will be run in order, in different shell sessions.
