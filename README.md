@@ -1,6 +1,14 @@
 # runr (WIP)
 
-Go-based CLI tool that aims to improve visibility of available commands when using package managers and build files such as poetry, npm, yarn, and Makefiles.
+Go-based CLI tool that aims to improve visibility of available commands in projects that use package managers and/or build tools, such as Poetry and Make.
+
+Currently Supported:
+- `package.json` for yarn projects
+- `pyproject.toml` for poetry projects
+- `Makefile` for projects that use Make
+
+Planned Support:
+- `package.json` for npm projects
 
 Users can also define their own commands in a project via a `runr.yaml` file or globally via a `~/.runr_global.yaml` file.
 
@@ -12,11 +20,14 @@ Download the latest release from the [releases page](
 
 You can also clone the repository and install the binary yourself.
 
-```
-Note:
+
+[!NOTE]
+The builds are not signed, so you may need to allow the binary to run in your system settings.
+
+[!WARNING]
 This project is still in development and may not be stable. Use at your own risk.
 It has only been tested on MacOS.
-```
+
 
 ## Usage
 ```
@@ -26,7 +37,7 @@ runr [command] [flags]
 Running `runr` without any arguments will display the available commands in the current directory.
 
 The available commands are determined by:
-- Looking for `package.json`, `yarn.lock`, `poetry.lock`, and `Makefile` files in the current directory.
+- Looking for the supported package managers and/or build tool files in the current directory.
 - Looking for a `runr.yaml` file in the current directory.
 - Looking for a `~/.runr_global.yaml` file in the home directory.
 
