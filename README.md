@@ -1,4 +1,4 @@
-# runr (WIP)
+# runr (beta)
 
 Go-based CLI tool that aims to improve visibility of available commands in projects that use package managers and/or build tools, such as Poetry and Make.
 
