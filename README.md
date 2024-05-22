@@ -21,8 +21,8 @@ Download the latest release from the [releases page](
 You can also clone the repository and install the binary yourself.
 
 
-[!NOTE]
-The builds are not signed, so you may need to allow the binary to run in your system settings.
+> [!NOTE]
+> The builds are not signed, so you may need to allow the binary to run in your system settings.
 
 [!WARNING]
 This project is still in development and may not be stable. Use at your own risk.
